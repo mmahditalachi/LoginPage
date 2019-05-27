@@ -72,6 +72,7 @@ public class SignUp {
 
         pass.setBounds(100,310,150,50);
         pass.setFont(new Font("Arial", Font.PLAIN, 20));
+
         pass_tf.setBounds(270,310,150,50);
         pass_tf.setFont(new Font("Arial", Font.PLAIN, 20));
 

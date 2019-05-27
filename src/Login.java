@@ -1,3 +1,4 @@
+import javax.jws.soap.SOAPBinding;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,7 +13,9 @@ public class Login {
 
     public static boolean user_correct=false,pass_correct=false;
     public static List<Users> user;
+    public static int Number;
     Connection connection = null;
+    public static String Username;
     private JFrame MainFrame;
     private JButton login,sign_up;
     private JTextField username,pass;
@@ -80,16 +83,23 @@ public class Login {
     public void SearchUsers()
     {
         for (int i = 0; i < user.size(); i++) {
-            if(username.getText().equals(user.get(i).getEmail())){
+            if(username.getText().equals(user.get(i).getEmail()) && !username.getText().equals("admin")){
                 user_correct =true;
+                Number = i;
+                Username = user.get(i).getEmail();
                 break;
             }
         }
         for (int i = 0; i < user.size(); i++) {
-            if(pass.getText().equals(user.get(i).getPassword())){
+            if(pass.getText().equals(user.get(i).getPassword()) && !pass.getText().equals("admin")){
                 pass_correct=true;
                 break;
             }
+        }
+        if (pass.getText().equals("admin") && username.getText().equals("admin"))
+        {
+            Username = "admin";
+            SelectSide selectSide = new SelectSide();
         }
     }
     public void Login_btn()
@@ -99,9 +109,11 @@ public class Login {
                 public void actionPerformed(ActionEvent e) {
                     SearchUsers();
                     if(pass_correct && user_correct) {
-                        HomePage homePage = new HomePage();
+                        SelectSide selectSide = new SelectSide();
+                        pass_correct=false;
+                        user_correct=false;
                     }
-                    else
+                    else if(pass_correct ==false && user_correct==false && !Username.equals("admin"))
                         JOptionPane.showMessageDialog(null,"incorrect email or password");
                 }
             });
