@@ -15,7 +15,7 @@ public class Login {
     public static List<Users> user;
     public static int Number;
     Connection connection = null;
-    public static String Username;
+    public static String Username =" ";
     private JFrame MainFrame;
     private JButton login,sign_up;
     private JTextField username,pass;
@@ -113,9 +113,9 @@ public class Login {
                         pass_correct=false;
                         user_correct=false;
                     }
-                    else if(pass_correct ==false && user_correct==false && !Username.equals("admin"))
-                        JOptionPane.showMessageDialog(null,"incorrect email or password");
-                }
+                    else if(pass_correct ==false && user_correct==false && !Username.equals("admin")){
+                        JOptionPane.showMessageDialog(null,"ایمیل یا پسورد اشتباه وارد شده است");}
+                    }
             });
     }
     public void ReadUserData()

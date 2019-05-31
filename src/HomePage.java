@@ -152,14 +152,14 @@ public class HomePage{
 
         student_present_panel.setLayout(null);
         student_present_panel.setBounds(50,20,600,600);
-        table_present.setBounds(0,170,900,450);
+        table_present.setBounds(150,170,400,450);
         student_present_panel.add(table_present);
         table_present.setRowHeight(20);
 
         table_present.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                GetTableValue();
+                GetTableValue(table_present.rowAtPoint(e.getPoint()));
             }
         });
 
@@ -249,9 +249,10 @@ public class HomePage{
         });
     }
 
-    private void GetTableValue()
+    private void GetTableValue(int Selected)
     {
-        int SelectedRow = table_present.getSelectedRow();
+//        int SelectedRow = table_present.getSelectedRow();
+        int SelectedRow = Selected;
         try{
         present_first_name.setText(table_present.getValueAt(SelectedRow, 0).toString());
         present_last_name.setText(table_present.getValueAt(SelectedRow, 1).toString());

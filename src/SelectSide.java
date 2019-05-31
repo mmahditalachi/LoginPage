@@ -23,8 +23,8 @@ public class SelectSide {
 
     public SelectSide() {
         MainFrame = new JFrame("انتخاب ترم");
-        MainFrame.setBackground(Color.white);
-
+        Table_names();
+        ComboBox();
         Panel.setBounds(0,0,500,250);
         Panel.setLayout(null);
         Panel.setBackground(Color.white);
@@ -46,10 +46,12 @@ public class SelectSide {
             Panel.add(new_term);
             Panel.add(this_term);
         }
+//        String[] mohi = {"mohi","mohi"};
+//        JComboBox cll = new JComboBox(mohi);
+//        cll.setBounds(0,0,100,100);
+//        Panel.add(cll);
 
         MainFrameOption();
-        Table_names();
-        ComboBox();
         Check_btn();
     }
 
@@ -72,7 +74,7 @@ public class SelectSide {
         }
         c1 = new JComboBox(table_name_array);
         c1.setBounds(270,30,200,50);
-        c1.setBackground(Color.red);
+        c1.setBackground(Color.white);
         //add combobox
         Panel.add(c1);
     }
@@ -160,7 +162,7 @@ public class SelectSide {
             pst.setString(2,Login.user.get(Number).getLast_name());
             pst.setString(3,Login.user.get(Number).getEmail());
             pst.setInt(4,Login.user.get(Number).getId());
-            pst.setString(3,Integer.toString(0));
+            pst.setString(5,Integer.toString(0));
             pst.execute();
 
         }catch (Exception e){
