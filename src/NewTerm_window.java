@@ -51,6 +51,7 @@ public class NewTerm_window {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CreateTable();
+                MainFrame.dispose();
             }
         });
     }
@@ -64,7 +65,7 @@ public class NewTerm_window {
         try {
             stmt = connection.createStatement();
             stmt.executeUpdate(sql);
-
+            JOptionPane.showMessageDialog(null,"جدول ساخته شد");
         }catch (Exception e)
         {
             JOptionPane.showMessageDialog(null,e.getMessage());

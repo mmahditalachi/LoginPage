@@ -89,15 +89,14 @@ public class SignUp {
             pst.setString(2,last_name_tf.getText());
             pst.setString(3,email_tf.getText());
             pst.setString(4,pass_tf.getText());
-            JOptionPane.showMessageDialog(null,"congratulation");
-
+            JOptionPane.showMessageDialog(null,"ثبت نام با موفقیت انجام شد");
             pst.execute();
 
+            MainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         }catch (Exception e)
         {
-            JOptionPane.showMessageDialog(null,"cant Insert information");
+            JOptionPane.showMessageDialog(null,e.getMessage());
         }
-
     }
     public void SignUp_btn()
     {
@@ -106,11 +105,10 @@ public class SignUp {
             public void actionPerformed(ActionEvent e) {
                 if (email_tf.getText().equals("") || first_name_tf.getText().equals("") || last_name_tf.getText().equals("") || pass_tf.getText().equals(""))
                 {
-                    JOptionPane.showMessageDialog(null,"you have to fill every textfield");
+                    JOptionPane.showMessageDialog(null,"لطفا همه فیلد ها را پر کنید");
                 }
                 else {
                     InsertToDatabase();
-                    MainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 }
             }
         });

@@ -44,7 +44,7 @@ public class HomePage{
 
     public HomePage()
     {
-        MainFrame = new JFrame();
+        MainFrame = new JFrame(SelectSide.ComboboxValue);
         left_side = new JPanel();
         right_side= new JPanel();
 

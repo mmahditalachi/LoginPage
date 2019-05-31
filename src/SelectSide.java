@@ -73,7 +73,7 @@ public class SelectSide {
         c1 = new JComboBox(table_name_array);
         c1.setBounds(270,30,200,50);
         c1.setBackground(Color.red);
-
+        //add combobox
         Panel.add(c1);
     }
 
