@@ -21,21 +21,25 @@ public class HomePage{
     private JPanel student_list_panel = new JPanel();
     private JPanel student_present_panel = new JPanel();
     private JPanel student_add_project = new JPanel();
+    private JPanel admin_project = new JPanel();
 
     private JButton update_list = new JButton("حضور غیاب");
+    private JButton update_table = new JButton("بروزرسانی");
     private JTextField present_first_name = new JTextField("نام دانشجو");
     private JTextField present_last_name = new JTextField("نام خانوادگی دانشجو");
     private JTextField present_present = new JTextField("حضوری دانشجو");
 
     private JButton student_present,student_list;
     private JButton add_project = new JButton("اضافه کردن پروزه");
-    private JTable table,table_present;
+    private JTable table,table_present,table_project;
     Connection connection;
     Connection conn =null;
     private PreparedStatement pst;
     CardLayout cl =  new CardLayout();
     //AddProject textfield
     private JTextField email,link;
+    //admin_project btn
+    private JButton admin_update;
 
 
     public HomePage()
@@ -74,6 +78,7 @@ public class HomePage{
         left_side.add(student_list_panel,"1");
         left_side.add(student_present_panel,"2");
         left_side.add(student_add_project,"3");
+        left_side.add(admin_project,"4");
         cl.show(left_side,"1");
         DrawTable();
     }
@@ -99,10 +104,17 @@ public class HomePage{
         add_project.setBounds(100,140,200,50);
         add_project.setFont(new Font("Arial", Font.PLAIN, 20));
 
+        admin_update = new JButton("پروزه دانشجو ها");
+        admin_update.setBounds(100,200,200,50);
+        admin_update.setFont(new Font("Arial", Font.PLAIN, 20));
+
         right_side.add(table_name);
         right_side.add(student_list);
-        if(Login.Username.equals("admin"))
+
+        if(Login.Username.equals("admin")) {
+            right_side.add(admin_update);
             right_side.add(student_present);
+        }
         else{
             right_side.add(add_project);
         }
@@ -120,7 +132,12 @@ public class HomePage{
     {
         table_present = new JTable();
 
-        update_list.setBounds(250,100,200,50);
+        update_table.setBounds(140,100,200,50);
+        update_table.setFont(new Font("Arial", Font.PLAIN, 20));
+        student_present_panel.add(update_table);
+
+
+        update_list.setBounds(350,100,200,50);
         update_list.setFont(new Font("Arial", Font.PLAIN, 20));
         student_present_panel.add(update_list);
 
@@ -143,6 +160,16 @@ public class HomePage{
             @Override
             public void mouseClicked(MouseEvent e) {
                 GetTableValue();
+            }
+        });
+
+        update_table.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String sql ="SELECT firstname,lastname,presents,id from" + " " + SelectSide.ComboboxValue;
+                Student_list obj = new Student_list();
+                DefaultTableModel dtm = obj.reading(sql);
+                table_present.setModel(dtm);
             }
         });
 
@@ -199,6 +226,29 @@ public class HomePage{
         });
     }
 
+    private void AdminProject()
+    {
+        JButton load_table = new JButton("بروزرسانی");
+        load_table.setBounds(250,100,200,50);
+
+        admin_project.setLayout(null);
+        admin_project.add(load_table);
+
+        table_project = new JTable();
+        table_project.setBounds(100,170,500,450);
+        admin_project.add(table_project);
+
+        load_table.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String sql ="SELECT firstname,lastname,project from" + " " + SelectSide.ComboboxValue;
+                Student_list obj = new Student_list();
+                DefaultTableModel dtm = obj.reading(sql);
+                table_project.setModel(dtm);
+            }
+        });
+    }
+
     private void GetTableValue()
     {
         int SelectedRow = table_present.getSelectedRow();
@@ -232,18 +282,21 @@ public class HomePage{
             public void actionPerformed(ActionEvent e) {
                 Student_presents();
                 cl.show(left_side,"2");
-                String sql ="SELECT firstname,lastname,presents,id from" + " " + SelectSide.ComboboxValue;
-                Student_list obj = new Student_list();
-                DefaultTableModel dtm = obj.reading(sql);
-                table_present.setModel(dtm);
             }
         });
-
         add_project.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cl.show(left_side,"3");
                 AddProject();
+            }
+        });
+
+        admin_update.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(left_side,"4");
+                AdminProject();
             }
         });
     }

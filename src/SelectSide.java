@@ -14,6 +14,7 @@ public class SelectSide {
     public static List<String> table_list;
     public static List<UserInfo> user;
     public static String ComboboxValue;
+    private JPanel Panel = new JPanel();
     private JFrame MainFrame;
     private JButton new_term,this_term;
     private JComboBox c1;
@@ -21,14 +22,19 @@ public class SelectSide {
     Connection connection_user = null;
 
     public SelectSide() {
-        MainFrame = new JFrame();
+        MainFrame = new JFrame("انتخاب ترم");
         MainFrame.setBackground(Color.white);
+
+        Panel.setBounds(0,0,500,250);
+        Panel.setLayout(null);
+        Panel.setBackground(Color.white);
+        MainFrame.add(Panel);
 
         if(!Login.Username.equals("admin")){
             this_term = new JButton("انتخاب ترم");
             this_term.setBounds(50,30,200,50);
             this_term.setFont(new Font("Arial", Font.PLAIN, 20));
-            MainFrame.add(this_term);
+            Panel.add(this_term);
         }
         else {
             this_term = new JButton("انتخاب ترم");
@@ -37,8 +43,8 @@ public class SelectSide {
             new_term = new JButton("ترم جدید");
             new_term.setBounds(50,100,200,50);
             new_term.setFont(new Font("Arial", Font.PLAIN, 20));
-            MainFrame.add(new_term);
-            MainFrame.add(this_term);
+            Panel.add(new_term);
+            Panel.add(this_term);
         }
 
         MainFrameOption();
@@ -68,7 +74,7 @@ public class SelectSide {
         c1.setBounds(270,30,200,50);
         c1.setBackground(Color.red);
 
-        MainFrame.add(c1);
+        Panel.add(c1);
     }
 
     private void Table_names(){
