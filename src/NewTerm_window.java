@@ -59,7 +59,7 @@ public class NewTerm_window {
     {
         String name = name_table_field.getText();
         connection = Mysql_Student_Schema.dbConnection();
-        String sql = "CREATE TABLE IF NOT EXISTS "+ " "+ name+"(firstname varchar (255),lastname varchar (255),email varchar (255),Presents varchar (255),id int PRIMARY KEY )";
+        String sql = "CREATE TABLE IF NOT EXISTS "+ " "+ name+"(firstname varchar (255),lastname varchar (255),email varchar (255),Presents varchar (255),id int PRIMARY KEY,project varchar (255))";
         System.out.println(sql);
         try {
             stmt = connection.createStatement();
